@@ -1,0 +1,23 @@
+version : '2'
+services:
+    redboard:
+      build: .
+      command: npm start
+      ports:
+        - "8443:8443"
+      volumes:
+        - ./ssl:/redboard/ssl
+	  links:
+        - mongodb
+      depends_on:
+        - mongodb
+    mongodb:
+      image: mongo:3.0.2
+      environment:
+        - MONGO_DATA_DIR=/data/db
+        - MONGO_LOG_DIR=/dev/null
+      volumes:
+        - ./data/db:/data/db
+      ports:
+        - 27017:27017
+      entrypoint: mongod
