@@ -7,7 +7,7 @@ services:
         - "8443:8443"
       volumes:
         - ./ssl:/redboard/ssl
-	  links:
+      links:
         - mongodb
       depends_on:
         - mongodb
